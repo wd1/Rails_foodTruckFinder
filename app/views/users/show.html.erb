@@ -1,0 +1,37 @@
+
+<%= button_to "Delete User", { action: "destroy", id: @user.id }, method: :delete, data: { confirm: "Are you sure you want to delete User?" }, class: "btn btn-sm white theme-background user-show-btn" %>
+<br>
+<br>
+<%= button_to "Update User", { action: "edit", id: @user.id }, method: :get, class: "btn btn-sm white theme-background user-show-btn" %>
+<br>
+<br>
+<h1>Welcome <%= @user.full_name%></h1>
+
+<br>
+<h3>Your Favorite Trucks</h3>
+<br>
+<div class="">
+  <table class="table table-striped">
+      <tr>
+        <th align="left">Truck</th>
+        <th align="left">Rating</th>
+        <th align="left">Category</th>
+      </tr>
+    <% @user.trucks.each do |truck| %>
+      <tr>
+        <td><%= link_to truck.name, truck_path(truck)%></td>
+        <td>
+          <% if @user.get_rating(truck) != 0 %>
+            <% @user.get_rating(truck).times do %>
+              <span class="glyphicon glyphicon-star"></span>
+            <% end %>
+            <% (5 - @user.get_rating(truck)).times do %>
+              <span class="glyphicon glyphicon-star-empty"></span>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= truck.category.name%></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

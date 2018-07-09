@@ -1,0 +1,81 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+.nav.navbar-nav li a {
+  color: #fff;
+}
+
+.navbar-header a {
+  color: #fff;
+}
+
+.nav.navbar-nav a:hover {
+  color: #8e2222;
+}
+
+.navbar-header a:hover {
+  color: #fff;
+}
+
+.theme-background {background-color:#8e2222;}
+.white {color:#ffffff;}
+
+.lib-img-show{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.checked {
+    color: orange;
+}
+
+.users-new, .users-edit {
+  text-align: center;
+}
+
+form input[type=text], form input[type=password] {
+  width: 100%;
+}
+
+form input[type=submit] {
+  background-color:#8e2222;
+  color:#ffffff;
+}
+
+.error-div {
+  text-align: center;
+  color: #8e2222;
+  text-decoration: underline;
+  font-size: 150%;
+}
+
+.user-show-btn {
+  min-width: 100px;
+  float: right;
+}
+
+.review-title {
+  width: 50% !important;
+}
+
+.review-content {
+  width: 50%;
+  min-height: 150px;
+}
+
+.normal-input {
+  width: 8%;
+}

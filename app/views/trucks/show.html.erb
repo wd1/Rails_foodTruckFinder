@@ -1,0 +1,131 @@
+<%# really have no idea why, but this div encloses everything from top until menu. and it seems to be doing something right so I'll keep it %>
+<div class="">
+  <%# heading %>
+  <h1><%= @truck.name %></h1>
+  <h3><%= @truck.category.name %></h3>
+
+  <%# display rating %>
+  <% if @truck.rating %>
+    <h3 class="rating-num">
+      <%= @truck.rating %> -
+      <% @truck.rating.round.times do %>
+        <span class="glyphicon glyphicon-star"></span>
+      <% end %>
+      <% (5 - @truck.rating.round).times do %>
+        <span class="glyphicon glyphicon-star-empty"></span>
+      <% end %>
+    </h3><br>
+  <% end %>
+
+  <% if @truck.pricey %>
+    <% @truck.pricey.times do %>
+      <span class="glyphicon glyphicon-bitcoin"></span>
+    <% end %>
+  <% end %>
+
+  <h1>
+
+  </h1>
+
+  <br>
+  <%# This row includes favorite and review buttons %>
+  <div class="row">
+    <%# Review Button %>
+    <% if !Review.find_by(user_id: current_user.id, truck_id: @truck.id) %>
+      <div class="button col-md-2">
+          <form method="get" action="/reviews/new" >
+            <button type="submit" class="theme-background white btn-lg btn">
+              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Write A Review
+            </button>
+          </form>
+      </div>
+    <% end %>
+    <%# favorite/unfavorite buttton %>
+    <div class="col-md-1">
+      <% if Favorite.find_by(user_id: current_user.id, truck_id: @truck.id) %>
+        <%= form_tag favorite_path(@truck), method: 'delete' do %>
+        <button type="submit" class="theme-background white btn-lg btn">
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Unfavorite
+        </button>
+          <% end %>
+      <% else %>
+      <%= form_tag favorites_path do %>
+        <button type="submit" class="theme-background white btn-lg btn">
+          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Favorite
+        </button>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div><%# end buttons div %>
+
+  <br>
+
+  <%# large truck img %>
+  <div class="" style='text-align: center;'>
+    <img src="<%= "#{@truck.img_url}" %>" alt="" style="width:900px;height:500px;">
+  </div>
+
+  <br>
+  <br>
+
+  <h3><%= @truck.description %></h3>
+
+</div>
+
+<br>
+
+<%# Menu %>
+
+<h3>Menu:</h3>
+<br>
+<div class="table">
+    <table style="width:40%; align:center" class ="table table-striped">
+        <tr>
+          <th align="left">Menu items</th>
+          <th align="left">Price</th>
+        </tr>
+      <% @truck.items.each do |item| %>
+        <tr>
+          <td><%= item.name %></td>
+          <td>$<%= item.price %></td>
+        </tr>
+      <% end %>
+    </table>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+<%# Show all Reviews %>
+<div class="">
+  <% if @truck.reviews.empty? %>
+
+    <h4>No reviews yet. Be the first to write a review!</h4>
+
+  <% else %>
+
+    <div class="" style="text-align: center;"><h2>Reviews</h2></div>
+    <% @truck.reviews.each do |review| %>
+        <div class="reviews">
+          <div class="row blockquote review-item">
+            <div class="col-md-3 text-center">
+              <img class="rounded-circle reviewer" src="http://standaloneinstaller.com/upload/avatar.png">
+              <div class="caption">
+                <small>by <a href="#joe"><%= review.user.username %></a></small>
+              </div>
+
+            </div>
+            <div class="col-md-9">
+              <h4><%= review.title %></h4>
+              <div class="ratebox text-center" data-id="0" data-rating="5"></div>
+              <p class="review-text"><%= review.content %></p>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  <% end %>
+
+</div>

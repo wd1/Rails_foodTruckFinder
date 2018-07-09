@@ -1,0 +1,74 @@
+<h1 class="users-edit">Update Your Profile</h1>
+<br>
+<div class="row vertical-offset-100">
+  <div class="col-md-6 col-md-offset-3">
+  	<div class="panel panel-default">
+		  <div class="panel-heading">
+        <p>* Indicates Required Field</p>
+		 	</div>
+		  <div class="panel-body">
+        <%= form_for @user do |f| %>
+          <div class="form-group">
+            <%= f.label "First Name" %>:
+            <%= f.text_field :f_name %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label "Last Name" %>:
+            <%= f.text_field :l_name %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label "Username*" %>:
+            <%= f.text_field :username, :required => true%>
+          </div>
+
+          <div class="form-group">
+            <%= f.label "Email*" %>:
+            <%= f.text_field :email, :required => true %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label "Password*" %>:
+            <%= f.password_field :password, :required => true %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label "Password Confirmation*" %>:
+            <%= f.password_field :password_confirmation, :required => true %>
+          </div>
+
+            <!-- <h4>Fill Out Location Details (optional)</h4> -->
+            <%= f.fields_for :location do |addr| %>
+
+              <div class="form-group">
+                <%= addr.label :street_address %>:
+                <%= addr.text_field :street_address %>
+              </div>
+
+              <div class="form-group">
+                <%= addr.label :city %>:
+                <%= addr.text_field :city %>
+              </div>
+
+              <div class="form-group">
+                <%= addr.label :state %>:
+                <%= addr.text_field :state %>
+              </div>
+
+              <div class="form-group">
+                <%= addr.label :zip %>:
+                <%= addr.text_field :zip %>
+              </div>
+
+              <div class="form-group">
+                <%= addr.label :neighborhood %>:
+                <%= addr.collection_select(:neighborhood_id, Neighborhood.all, :id, :name, include_blank: '') %>
+              </div>
+            <% end %>
+          <%= submit_tag "Update User", :class => "btn btn-lg btn-block white theme-background" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
